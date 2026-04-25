@@ -2,9 +2,18 @@ import {useEffect, useState} from "react";
 import apiClient from "../services/network/api-client";
 import {CanceledError} from "axios";
 
-interface Game {
+export interface Platform {
+    id: number;
+    name: string;
+    slug: string;
+}
+
+export interface Game {
     id: number;
     name: string
+    background_image: string;
+    parent_platforms: { platform: Platform }[]
+    metacritic: number;
 }
 
 interface FetchGameResponse {
@@ -12,7 +21,7 @@ interface FetchGameResponse {
     results: Game[]
 }
 
-const UseGames = () => {
+const useGames = () => {
     const [games, setGames] = useState<Game[]>([]);
     const [error, setError] = useState(null);
     useEffect(() => {
@@ -33,4 +42,4 @@ const UseGames = () => {
     }
 };
 
-export default UseGames;
+export default useGames;
