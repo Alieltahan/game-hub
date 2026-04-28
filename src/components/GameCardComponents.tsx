@@ -1,8 +1,13 @@
 import { Box } from '@chakra-ui/react';
-
-const GameCardContainer = () => {
+import {ReactNode} from "react";
+interface Props {
+    children: ReactNode;
+}
+const GameCardContainer = ({children}: Props) => {
     return (
-        <Box width="300px" borderRadius="10" overflow="hidden" />
+        <Box width="300px" borderRadius="10" overflow="hidden">
+            {children}
+        </Box>
     );
 };
 
