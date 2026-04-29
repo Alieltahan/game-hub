@@ -1,11 +1,11 @@
 import GameCard from './GameCard'
-import GameCardComponents from './GameCardComponents'
+import GameCardContainer from './GameCardContainer'
 import GameCardSkeleton from "./GameCardSkeleton";
 import GameGrid from "./GameGrid";
 
 export {
     GameCard,
-    GameCardComponents,
+    GameCardContainer,
     GameCardSkeleton,
     GameGrid,
 }
