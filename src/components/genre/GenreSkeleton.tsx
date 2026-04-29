@@ -1,6 +1,7 @@
 import {HStack, ListItem, Skeleton, SkeletonCircle} from "@chakra-ui/react";
+import { ReactElement } from "react";
 
-const GenreSkeleton: React.FC = () => {
+const GenreSkeleton: React.FC = (): ReactElement => {
     return (
         <ListItem paddingY="5px">
             <HStack>
