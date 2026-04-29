@@ -35,7 +35,7 @@ const useData = <T>({endpoint, axiosRequestConfig, deps}: UseDataPros) => {
             });
 
         return () => controller.abort();
-    }, [endpoint, (deps? [...deps] : [])]);
+    }, (deps? [...deps, endpoint] : [endpoint]));
 
     return { data, error, isLoading };
 };
