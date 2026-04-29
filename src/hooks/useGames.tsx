@@ -1,4 +1,5 @@
 import useData from "./useData";
+import { Genre } from "./useGenres";
 
 export interface Platform {
     id: number;
@@ -14,6 +15,17 @@ export interface Game {
     metacritic: number;
 }
 
-const useGames = () => useData<Game>('/games')
+interface UseGamesProps {
+    selectedGenre?: Genre | null;
+}
+
+const useGames = ({selectedGenre}: UseGamesProps) => useData<Game>({ endpoint: '/games',
+axiosRequestConfig: {
+    params: {
+        genres: selectedGenre?.id,
+    }
+},
+deps: selectedGenre?.id ? [selectedGenre?.id] : [],
+})
 
 export default useGames;

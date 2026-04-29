@@ -1,6 +1,6 @@
 import useData from "./useData";
 
-interface Genre {
+export interface Genre {
     id: number;
     name: string;
     slug: string;
@@ -9,6 +9,6 @@ interface Genre {
 }
 
 
-const useGenres = () => useData<Genre>('/genres');
+const useGenres = () => useData<Genre>({endpoint: '/genres'});
 
 export default useGenres;
