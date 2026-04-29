@@ -1,21 +1,13 @@
-import React from 'react';
-import {Image, List, ListItem, Skeleton, Text} from "@chakra-ui/react";
+import {HStack, ListItem, Skeleton, SkeletonCircle} from "@chakra-ui/react";
 
-const GenreSkeleton = () => {
+const GenreSkeleton: React.FC = () => {
     return (
-        <List>
-            <Skeleton />
-            <ListItem>
-                <Skeleton />
-                <Image>
-                    <Skeleton />
-                </Image>
-                <Text>
-                    <Skeleton />
-                </Text>
-
-            </ListItem>
-        </List>
+        <ListItem paddingY="5px">
+            <HStack>
+                <SkeletonCircle size="32px" />
+                <Skeleton height="16px" width="120px" borderRadius="4px" />
+            </HStack>
+        </ListItem>
     );
 };
 
