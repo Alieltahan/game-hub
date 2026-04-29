@@ -1,8 +1,8 @@
 import './App.css'
 import {Grid, GridItem, Show} from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
-import GameGrid from "./components/GameGrid";
-import GenresList from "./components/GenresList";
+import {GenresList} from "./components/genre";
+import {GameGrid} from "./components/game";
 
 function App() {
   return <Grid templateAreas={{
