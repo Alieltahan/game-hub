@@ -19,7 +19,7 @@ const GameGrid = ({selectedGenre, selectedPlatform, sortOrder}: GameGridProps) =
 	}
 
 	return (
-		<SimpleGrid columns={{sm: 2, md: 2, lg: 3}} spacing={3} padding={10}>
+		<SimpleGrid columns={{sm: 2, md: 2, lg: 3, xl: 4}} spacing={3} padding={10}>
 			{isLoading && skeletonArray.map((_sk, index) =>
 				<GameCardContainer key={index}>
 					<GameCardSkeleton/>
