@@ -9,10 +9,11 @@ export interface GameGridProps {
 	selectedGenre?: Genre | null;
 	selectedPlatform: Platform | null;
 	sortOrder: string | null;
+	searchText: string;
 }
 
-const GameGrid = ({selectedGenre, selectedPlatform, sortOrder}: GameGridProps) => {
-	const {data: games, error, isLoading} = useGames({selectedGenre, selectedPlatform, sortOrder});
+const GameGrid = ({selectedGenre, selectedPlatform, sortOrder, searchText}: GameGridProps) => {
+	const {data: games, error, isLoading} = useGames({selectedGenre, selectedPlatform, sortOrder, searchText});
 	const skeletonArray = new Array(6).fill(1);
 	if (error) {
 		return <Text colorScheme="red">error</Text>;

@@ -13,15 +13,16 @@ export interface GameQuery {
 	genre: Genre | null;
 	platform: Platform | null;
 	sortOrder: string | null
+	searchText: string;
 }
 
 function App() {
-	const [gameQuery, setGameQuery] = useState<GameQuery>({genre: null, platform: null, sortOrder: null});
+	const [gameQuery, setGameQuery] = useState<GameQuery>({genre: null, platform: null, sortOrder: null, searchText: ''});
 
 	function renderNavBar() {
 		return (
 			<GridItem area="nav">
-				<NavBar/>
+				<NavBar onSearch={(searchText => setGameQuery({...gameQuery, searchText}))}/>
 			</GridItem>);
 	};
 
@@ -45,7 +46,8 @@ function App() {
 				<SortSelector sortOrder={gameQuery.sortOrder}
 				              onSelectedSortOrder={(sortOrder) => setGameQuery({...gameQuery, sortOrder})}/>
 			</HStack>
-			<GameGrid selectedPlatform={gameQuery.platform} selectedGenre={gameQuery.genre} sortOrder={gameQuery.sortOrder}/>
+			<GameGrid searchText={gameQuery.searchText} selectedPlatform={gameQuery.platform} selectedGenre={gameQuery.genre}
+			          sortOrder={gameQuery.sortOrder}/>
 		</GridItem>;
 	}
 
