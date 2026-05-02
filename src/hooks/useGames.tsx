@@ -1,5 +1,5 @@
 import useData from "./useData";
-import { Genre } from "./useGenres";
+import {GameGridProps} from "../components/game/GameGrid";
 
 export interface Platform {
 	id: number;
@@ -15,20 +15,16 @@ export interface Game {
 	metacritic: number;
 }
 
-interface UseGamesProps {
-	selectedGenre?: Genre | null;
-	selectedPlatform?: Platform | null;
-}
-
-const useGames = ({selectedGenre, selectedPlatform}: UseGamesProps) => useData<Game>({
+const useGames = ({selectedGenre, selectedPlatform, sortOrder}: GameGridProps) => useData<Game>({
 	endpoint: '/games',
 	axiosRequestConfig: {
 		params: {
 			genres: selectedGenre?.id,
-			platforms: selectedPlatform?.id
+			platforms: selectedPlatform?.id,
+			ordering: sortOrder
 		}
 	},
-	deps: [selectedGenre?.id, selectedPlatform?.id],
+	deps: [selectedGenre?.id, selectedPlatform?.id, sortOrder],
 });
 
 export default useGames;
