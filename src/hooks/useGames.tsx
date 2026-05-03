@@ -15,17 +15,20 @@ export interface Game {
 	metacritic: number;
 }
 
-const useGames = ({selectedGenre, selectedPlatform, sortOrder, searchText}: GameGridProps) => useData<Game>({
+interface UseGameProps extends Omit<GameGridProps, 'games' | 'isLoading' | 'error'> {
+}
+
+const useGames = ({selectedGenre, platform, sortOrder, searchText}: UseGameProps) => useData<Game>({
 	endpoint: '/games',
 	axiosRequestConfig: {
 		params: {
 			genres: selectedGenre?.id,
-			platforms: selectedPlatform?.id,
+      platforms: platform?.id,
 			ordering: sortOrder,
 			search: searchText
 		}
 	},
-	deps: [selectedGenre?.id, selectedPlatform?.id, sortOrder, searchText],
+  deps: [selectedGenre?.id, platform?.id, sortOrder, searchText],
 });
 
 export default useGames;

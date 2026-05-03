@@ -6,12 +6,13 @@ import { GameCardContainer } from "../game";
 import GenreSkeleton from "./GenreSkeleton";
 
 interface GenresListProps {
-    onSelectedGenre: (genre: Genre) => void;
-    selectedGenre: Genre | null;
+  onSelectedGenre: (genre: Genre) => void;
+  selectedGenre: Genre | null;
+  genres: Genre[]
+  isLoading: boolean;
 }
 
-const GenresList = ({ onSelectedGenre, selectedGenre }: GenresListProps): ReactElement => {
-    const { data: genres, isLoading } = useGenres();
+const GenresList = ({onSelectedGenre, selectedGenre, genres, isLoading}: GenresListProps): ReactElement => {
     const skeletonArray = new Array(15).fill(1);
     const isGenreSelected = (genreId: number) => selectedGenre?.id === genreId;
 

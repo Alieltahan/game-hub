@@ -5,8 +5,8 @@ import NavBar from "./components/NavBar";
 import { GenresList } from "./components/genre";
 import { GameGrid } from "./components/game";
 import PlatformSelector from "./components/PlatformSelector";
-import { Platform } from "./hooks/useGames";
-import { Genre } from "./hooks/useGenres";
+import useGames, {Platform} from "./hooks/useGames";
+import useGenres, {Genre} from "./hooks/useGenres";
 import SortSelector from "./components/SortSelector";
 import GameHeading from "./components/GameHeading";
 
@@ -19,6 +19,8 @@ export interface GameQuery {
 
 function App() {
 	const [gameQuery, setGameQuery] = useState<GameQuery>({genre: null, platform: null, sortOrder: null, searchText: ''});
+  const {data: genres, isLoading: isGenresLoading} = useGenres();
+  const {data: games, error: gameFetchError, isLoading: isGamesLoading} = useGames(gameQuery);
 
 	function renderNavBar() {
 		return (
@@ -31,6 +33,8 @@ function App() {
 		return <Show above="lg">
 			<GridItem area="aside" paddingX="5px">
 				<GenresList
+          genres={genres}
+          isLoading={isGenresLoading || isGamesLoading}
 					onSelectedGenre={(genre: Genre) => setGameQuery({...gameQuery, genre})}
 					selectedGenre={gameQuery.genre}/>
 			</GridItem>
@@ -50,8 +54,7 @@ function App() {
 				              onSelectedSortOrder={(sortOrder) => setGameQuery({...gameQuery, sortOrder})}/>
 			</HStack>
 			</Box>
-			<GameGrid searchText={gameQuery.searchText} selectedPlatform={gameQuery.platform} selectedGenre={gameQuery.genre}
-			          sortOrder={gameQuery.sortOrder}/>
+      <GameGrid games={games} error={gameFetchError} isLoading={isGenresLoading || isGamesLoading}/>
 		</GridItem>;
 	}
 
