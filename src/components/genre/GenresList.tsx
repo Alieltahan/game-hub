@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-import { Button, HStack, Image, List, ListItem } from "@chakra-ui/react";
+import {Button, Heading, HStack, Image, List, ListItem} from "@chakra-ui/react";
 import useGenres, { Genre } from "../../hooks/useGenres";
 import {getCroppedUrl} from "../../services/utils";
 import { GameCardContainer } from "../game";
@@ -12,14 +12,14 @@ interface GenresListProps {
 
 const GenresList = ({ onSelectedGenre, selectedGenre }: GenresListProps): ReactElement => {
     const { data: genres, isLoading } = useGenres();
-    const skeletonArray = new Array(15).fill(1)
-
-    const truncateName = (s: string, max = 12) =>
-        s.length > max ? `${s.slice(0, max)}...` : s;
-
+    const skeletonArray = new Array(15).fill(1);
     const isGenreSelected = (genreId: number) => selectedGenre?.id === genreId;
 
     return (
+      <>
+          <Heading fontSize='2xl' marginBottom="3">
+              Genres
+          </Heading>
         <List>
             {isLoading && skeletonArray.map((_sk, index) =>
                 <GameCardContainer key={index}>
@@ -29,11 +29,19 @@ const GenresList = ({ onSelectedGenre, selectedGenre }: GenresListProps): ReactE
             {genres.map((genre: Genre) => (
                 <ListItem key={genre.id} paddingY="5px">
                 <HStack>
-                    <Image boxSize="32px" borderRadius="8" src={getCroppedUrl(genre.image_background)}  />
-                    <Button fontWeight={isGenreSelected(genre.id) ? 'bold' : 'normal'} colorScheme={isGenreSelected(genre.id) ? 'red' : 'white'} variant="link" fontSize="lg" onClick={() => onSelectedGenre(genre)}>{truncateName(genre.name)}</Button>
+                    <Image
+                      boxSize="32px"
+                      borderRadius="8"
+                      src={getCroppedUrl(genre.image_background)}
+                      objectFit="cover"/>
+                    <Button whiteSpace="normal" textAlign="left"
+                            fontWeight={isGenreSelected(genre.id) ? 'bold' : 'normal'}
+                            colorScheme={isGenreSelected(genre.id) ? 'red' : 'white'} variant="link" fontSize="lg"
+                            onClick={() => onSelectedGenre(genre)}>{genre.name}</Button>
                 </HStack>
             </ListItem>))}
         </List>
+      </>
     );
 };
 
